@@ -31,9 +31,13 @@ class GameEngine
     if (living_neighbours > 3) || (living_neighbours < 2)
       cell.set_living_next_tick(false)
     end
-    if !cell.is_alive && (living_neighbours == 2 || living_neighbours == 3)
+    if cell.is_alive && (living_neighbours == 2 || living_neighbours == 3)
       cell.set_living_next_tick(true)
     end
+    if !cell.is_alive && (living_neighbours == 3)
+      cell.set_living_next_tick(true)
+    end
+
   end
 
   def get_surrounding_cell_status(row_index, column_index)

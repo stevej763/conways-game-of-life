@@ -1,8 +1,8 @@
 require 'securerandom'
 
 class Cell
-  LIVING = "+"
-  DEAD = "-"
+  LIVING = "\u26AB"
+  DEAD = "\u26AA"
   def initialize(living = false)
     @alive = living
     @id = SecureRandom.uuid
