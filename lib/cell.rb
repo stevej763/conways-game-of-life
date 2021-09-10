@@ -1,9 +1,12 @@
+require 'securerandom'
+
 class Cell
   LIVING = "+"
   DEAD = "-"
   def initialize(living = false)
     @alive = living
-    
+    @id = SecureRandom.uuid
+    @living_next_tick
   end
 
   def is_alive
@@ -18,8 +21,20 @@ class Cell
     @alive = false
   end
 
+  def get_id
+    return @id
+  end
+
+  def set_living_next_tick(state)
+    @living_next_tick = state
+  end
+
+  def update_to_next_state
+    @alive = @living_next_tick
+  end
+
   def display_cell
-    return  @alive ? LIVING : DEAD
+    return @alive ? LIVING : DEAD
   end
 
 end
