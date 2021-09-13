@@ -1,15 +1,12 @@
-require 'securerandom'
-
 class Cell
-  LIVING = "\u26AB"
-  DEAD = "\u26AA"
+  LIVING = "\u26AA"
+  DEAD = "\u26AB"
   def initialize(living = false)
     @alive = living
-    @id = SecureRandom.uuid
     @living_next_tick
   end
 
-  def is_alive
+  def is_alive?
     return @alive
   end
 

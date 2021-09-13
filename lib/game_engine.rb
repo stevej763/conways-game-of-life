@@ -20,8 +20,8 @@ class GameEngine
   end
 
   def triggerUpdate
-    @grid.each_with_index do |row, row_index|
-      row.each_with_index do |cell, column_index|
+    @grid.each_with_index do |row|
+      row.each_with_index do |cell|
         cell.update_to_next_state
       end
     end
@@ -31,10 +31,7 @@ class GameEngine
     if (living_neighbours > 3) || (living_neighbours < 2)
       cell.set_living_next_tick(false)
     end
-    if cell.is_alive && (living_neighbours == 2 || living_neighbours == 3)
-      cell.set_living_next_tick(true)
-    end
-    if !cell.is_alive && (living_neighbours == 3)
+    if !cell.is_alive? && (living_neighbours == 3)
       cell.set_living_next_tick(true)
     end
 
@@ -42,37 +39,26 @@ class GameEngine
 
   def get_surrounding_cell_status(row_index, column_index)
     living_neighbours = 0
-    results = []
-
-    results << get_status(row_index -1, column_index -1) #up-left
-    results << get_status(row_index, column_index -1) #up
-    results << get_status(row_index +1, column_index -1) #up_right
-    results << get_status(row_index -1, column_index) #left
-    results << get_status(row_index +1, column_index) #right
-    results << get_status(row_index -1, column_index +1) #down_left
-    results << get_status(row_index, column_index +1) #down
-    results << get_status(row_index +1, column_index +1) #down_left
     
-    results.each do |result|
-      if result == true
-        living_neighbours += 1
-      end
-    end
+    get_status(row_index -1, column_index -1) == true ? living_neighbours +=1 : nil
+    get_status(row_index, column_index -1) == true ? living_neighbours +=1 : nil
+    get_status(row_index +1, column_index -1) == true ? living_neighbours +=1 : nil#up_right
+    get_status(row_index -1, column_index) == true ? living_neighbours +=1 : nil#left
+    get_status(row_index +1, column_index) == true ? living_neighbours +=1 : nil#right
+    get_status(row_index -1, column_index +1) == true ? living_neighbours +=1 : nil#down_left
+    get_status(row_index, column_index +1) == true ? living_neighbours +=1 : nil#down
+    get_status(row_index +1, column_index +1) == true ? living_neighbours +=1 : nil#down_left
+
     return living_neighbours
   end
 
   def get_status(row, column)
-    #puts "checking cell at row: #{row} column: #{column}"
-    #puts "highest allowed cell index in row: #{@cells_per_row -1} heighest allowed column index: #{@row_count -1}"
     if row < 0 || column < 0
-      #puts "Skipped, grid reference lower than minimum"
       return false
     elsif row > (@cells_per_row - 1) || column > (@row_count - 1)
-      #puts "Skipped, grid reference higher than maximum"
       return false
     else
-      #puts "Found neighbour for: #{@grid[row][column]}"
-      return @grid[row][column].is_alive
+      return @grid[row][column].is_alive?
     end
   end
 

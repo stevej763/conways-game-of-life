@@ -4,26 +4,26 @@ require "cell"
 describe 'GameOfLifeGrid' do
   number_of_columns = 10
   number_of_rows = 10
+  chance_of_life = 0
 
   cell = Cell.new
-      grid = [
-        [cell, cell, cell, cell, cell, cell, cell, cell, cell, cell],
-        [cell, cell, cell, cell, cell, cell, cell, cell, cell, cell],
-        [cell, cell, cell, cell, cell, cell, cell, cell, cell, cell],
-        [cell, cell, cell, cell, cell, cell, cell, cell, cell, cell],
-        [cell, cell, cell, cell, cell, cell, cell, cell, cell, cell],
-        [cell, cell, cell, cell, cell, cell, cell, cell, cell, cell],
-        [cell, cell, cell, cell, cell, cell, cell, cell, cell, cell],
-        [cell, cell, cell, cell, cell, cell, cell, cell, cell, cell],
-        [cell, cell, cell, cell, cell, cell, cell, cell, cell, cell],
-        [cell, cell, cell, cell, cell, cell, cell, cell, cell, cell] 
-      ]
+  grid = [
+    [cell, cell, cell, cell, cell, cell, cell, cell, cell, cell],
+    [cell, cell, cell, cell, cell, cell, cell, cell, cell, cell],
+    [cell, cell, cell, cell, cell, cell, cell, cell, cell, cell],
+    [cell, cell, cell, cell, cell, cell, cell, cell, cell, cell],
+    [cell, cell, cell, cell, cell, cell, cell, cell, cell, cell],
+    [cell, cell, cell, cell, cell, cell, cell, cell, cell, cell],
+    [cell, cell, cell, cell, cell, cell, cell, cell, cell, cell],
+    [cell, cell, cell, cell, cell, cell, cell, cell, cell, cell],
+    [cell, cell, cell, cell, cell, cell, cell, cell, cell, cell],
+    [cell, cell, cell, cell, cell, cell, cell, cell, cell, cell] 
+  ]
 
   describe "get_grid" do
     context "a #{number_of_rows}x#{number_of_columns} grid has been initialised" do
-      underTest = GameOfLifeGrid.new(number_of_rows, number_of_columns)
+      underTest = GameOfLifeGrid.new(number_of_rows, number_of_columns, chance_of_life)
       RESULT = underTest.get_grid
-
       it "is #{number_of_rows}" do
         expect(RESULT.length).to eq(10)
       end

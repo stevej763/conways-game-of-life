@@ -26,8 +26,8 @@ class GameOfLifeGrid
     row_count.times do |row_number|
       grid_template << [] #add a new empty row
       cells_per_row.times do
-        number = rand(chance_of_life)
-        if number == 1
+        will_be_alive = rand(chance_of_life)
+        if will_be_alive == 1
           alive = true
         else
           alive = false
